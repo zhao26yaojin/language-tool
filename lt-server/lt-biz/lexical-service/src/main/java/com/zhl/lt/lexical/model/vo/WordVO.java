@@ -57,4 +57,7 @@ public class WordVO {
 	@JsonProperty(IT_CODE)
 	private String itMeaning;
 
+	@Schema(description = "等级")
+	private Integer level;
+
 }

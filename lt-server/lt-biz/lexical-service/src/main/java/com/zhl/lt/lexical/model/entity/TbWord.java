@@ -46,4 +46,7 @@ public class TbWord {
 	@Schema(description = "意大利语语义")
 	private String itMeaning;
 
+	@Schema(description = "等级")
+	private Integer level;
+
 }
