@@ -19,6 +19,7 @@ public interface WordMapper extends BaseMapper<TbWord> {
 			.eq(StringUtils.isNotBlank(qo.getName()), TbWord::getName, qo.getName())
 			.eq(StringUtils.isNotBlank(qo.getSrcLang()), TbWord::getSrcLang, qo.getSrcLang())
 			.eq(StringUtils.isNotBlank(qo.getPartOfSpeech()), TbWord::getPartOfSpeech, qo.getPartOfSpeech())
+			.eq(qo.getLevel() != null, TbWord::getLevel, qo.getLevel())
 			.in(CollectionUtils.isNotEmpty(qo.getIdList()), TbWord::getId, qo.getIdList());
 
 		return wrapper;

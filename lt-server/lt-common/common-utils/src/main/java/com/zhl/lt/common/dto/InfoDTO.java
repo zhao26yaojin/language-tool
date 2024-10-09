@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class InfoDTO {
+public class InfoDTO<T> {
 
-	private String code;
+	private T code;
 
 	private String desc;
 

@@ -4,24 +4,25 @@ import lombok.Getter;
 
 public enum LevelEnum {
 
-    SKILLED("skilled", "熟练"),
+	PROFICIENT(0, "精通"),
 
-    FAMILLIAR("familliar", "熟悉"),
+	SKILLED(1, "熟练"),
 
-    COMMON("common", "一般");
+	FAMILLIAR(2, "熟悉");
 
-    @Getter
-    private String code;
+	@Getter
+	private Integer code;
 
-    @Getter
-    private String desc;
+	@Getter
+	private String desc;
 
-    LevelEnum(String code, String desc) {
-        this.code = code;
-        this.desc = desc;
-    }
+	LevelEnum(Integer code, String desc) {
+		this.code = code;
+		this.desc = desc;
+	}
 
-    public String getCode() {
-        return this.code;
-    }
+	public Integer getCode() {
+		return this.code;
+	}
+
 }

@@ -23,4 +23,7 @@ public class WordQO {
 	@Schema(description = "词性")
 	private String partOfSpeech;
 
+	@Schema(description = "等级")
+	private Integer level;
+
 }
