@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LanguageInfo {
+public class InfoDTO {
 
 	private String code;
 
