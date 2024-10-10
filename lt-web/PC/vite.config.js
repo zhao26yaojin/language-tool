@@ -30,7 +30,7 @@ export default defineConfig(({ mode, command }) => {
         server: {
             proxy: {
                 [VITE_BASE_API]: {
-                    target: `${VITE_APP_BASE_URL}:9003`,
+                    target: `${VITE_APP_BASE_URL}:3002`,
                     rewrite: path => path.replace(new RegExp('^' + VITE_BASE_API), '')
                 }
                 // '/lexical': {

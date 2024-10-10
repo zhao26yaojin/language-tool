@@ -16,6 +16,12 @@
                     </el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item label="Level">
+                <el-select v-model="searchParam.level" placeholder="Select Level" clearable>
+                    <el-option v-for="item in levelInfoList" :key="item.code" :label="item.desc" :value="item.code">
+                    </el-option>
+                </el-select>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSearch">Query</el-button>
             </el-form-item>
@@ -29,6 +35,7 @@
             </el-table-column>
             <el-table-column prop="srcLang" label="Source Language" width="180" />
             <el-table-column prop="partOfSpeech" label="Part of Speech" />
+            <el-table-column prop="level" label="Level" />
             <el-table-column fixed="right" label="Operations" width="120">
                 <template #default="scope">
                     <el-button link type="primary" size="small" @click="onEdit(scope.row)">Edit</el-button>
@@ -46,20 +53,23 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getDictInfo2 } from '@/api/dict'
 import { selectWordPage, deleteLexicalInfo } from '@/api/wordManager'
+import { getLevelInfo } from '@/api/info'
 
 const router = useRouter()
 
 const languageInfoList = getDictInfo2('language')
 const partOfSpeechInfoList = getDictInfo2('partOfSpeech')
+const levelInfoList = reactive([])
 
 const searchParam = reactive({
     name: '',
     srcLang: '',
     partOfSpeech: '',
+    level: null,
     current: 1,
     size: 10,
     total: 0
@@ -67,6 +77,18 @@ const searchParam = reactive({
 })
 
 const tableData = reactive([])
+
+const getLevelInfoList = async () => {
+    const levelInfos = await getLevelInfo()
+
+    console.log('aa' + levelInfos)
+
+    levelInfoList.push(...levelInfos)
+}
+
+onMounted(() => {
+    getLevelInfoList()
+})
 
 const onSearch = async () => {
     const { result } = await selectWordPage(searchParam)

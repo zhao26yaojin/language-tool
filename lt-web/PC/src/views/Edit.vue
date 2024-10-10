@@ -14,6 +14,13 @@
                 <span>音标：</span>
                 <el-input class="phonetic-input" v-model="word.phoneticSymbol" clearable></el-input>
             </div>
+            <div class="phonetic-wrap">
+                <span>等级：</span>
+                <el-select v-model="word.level" size="large" placeholder="Select Level">
+                    <el-option v-for="item in levelInfoList" :key="item.code" :label="item.desc" :value="item.code">
+                    </el-option>
+                </el-select>
+            </div>
         </div>
 
         <div>
@@ -50,6 +57,7 @@ import { useRoute } from 'vue-router'
 import { Check, Plus, Delete } from '@element-plus/icons-vue'
 import { getDictInfo, getDictInfo2 } from '@/api/dict'
 import { getLexicalInfo, saveLexicalInfo } from '@/api/wordManager'
+import { getLevelInfo } from '@/api/info'
 // import { ElMessage } from 'element-plus'
 
 const route = useRoute()
@@ -57,15 +65,26 @@ const route = useRoute()
 // const languageInfoList = getDictInfo2('language')
 const languageInfoList = reactive([])
 const partOfSpeechInfoList = getDictInfo2('partOfSpeech')
+const levelInfoList = reactive([])
 
 const word = reactive({})
 const sentenceInfoMap = reactive({})
 
 const tgtLang = ref('')
 
+const getLevelInfoList = async () => {
+    const levelInfos = await getLevelInfo()
+
+    console.log('aa' + levelInfos)
+
+    levelInfoList.push(...levelInfos)
+}
+
 onMounted(async () => {
     const { result: langResult } = await getDictInfo('language')
     languageInfoList.push(...langResult)
+
+    getLevelInfoList()
 
     if (route.params.id) {
         let params = {
@@ -187,6 +206,7 @@ const rules = reactive({
 
 .src-info-wrap {
     height: 50px;
+    display: flex;
 }
 
 .info-wrap {

@@ -12,7 +12,8 @@
             <el-button type="primary" size="large" :icon="Search" class="search-button" @click="search">查询</el-button>
         </div>
         <div class="src-wrap">
-            <p><span>[{{ wordInfo.phoneticSymbol }}]</span></p>
+            <p class="item"><span>Phonetic: [{{ wordInfo.phoneticSymbol }}]</span></p>
+            <p class="item"><span>Level: {{ wordInfo.level }}</span></p>
         </div>
         <div>
             <el-tabs v-model="tgtLang" type="card" class="demo-tabs" @tab-click="handleClick">
@@ -142,6 +143,11 @@ const searchLexical = async (params) => {
 
 .src-wrap {
     height: 50px;
+    display: flex;
+}
+
+.src-wrap > .item {
+    margin-right: 20px;
 }
 
 .sample {
